@@ -19,5 +19,5 @@ library.add(faUserSecret, fas)
 
 const app = createApp(App)
 app.use(router)
-app.mount('#app')
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.mount('#app')

@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <Sidebar />
+    <ManaTrack />
     <div class="main">
       <router-view />
     </div>
@@ -9,6 +10,7 @@
 
 <script setup>
 import Sidebar from './components/Sidebar.vue'
+import ManaTrack from './components/ManaTrack.vue';
 </script>
 
 <style>

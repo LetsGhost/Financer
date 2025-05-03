@@ -6,8 +6,12 @@
         <h2>Financer</h2>
       </div>
       <br />
-      <p><font-awesome-icon :icon="['fas', 'house']" /> Home</p>
-      <p><font-awesome-icon :icon="['fas', 'house']" /> Analytics</p>
+      <router-link to="/" class="sidebar-link">
+        <font-awesome-icon :icon="['fas', 'house']" /> Home
+      </router-link>
+      <router-link to="/management" class="sidebar-link">
+        <font-awesome-icon :icon="['fas', 'house']" /> Management
+      </router-link>
       <div class="copyright-bottom">
         <p>© 2025 Financer.</p>
         <p>Version 1.0.0</p>
