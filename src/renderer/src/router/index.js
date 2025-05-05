@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../components/Home.vue'
 import Management from '../components/Management.vue'
+import Settings from '../components/Settings.vue'
 
 const routes = [
   {
@@ -10,7 +11,11 @@ const routes = [
   {
     path: '/management',
     component: Management
-  }
+  },
+  {
+    path: '/settings',
+    component: Settings
+  },
 ]
 
 const router = createRouter({
