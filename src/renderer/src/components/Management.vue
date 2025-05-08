@@ -1,26 +1,48 @@
 <template>
   <div class="dashboard-grid">
-    <div class="dashboard-box">
+    <div
+      class="dashboard-box"
+      :class="{ selected: selectedBox === 0 }"
+      @click="selectBox(0)"
+    >
       <h3>Wiederholende Zahlungen</h3>
       <div class="payment-cards">
-        <div
-          v-for="(payment, idx) in nextRecurringPayments"
-          :key="idx"
-          class="payment-card"
-        >
-          <div class="payment-title">{{ payment.title }}</div>
-          <div class="payment-amount">{{ payment.amount }} €</div>
-          <div class="payment-date">Nächste Fälligkeit: {{ payment.nextDate }}</div>
-        </div>
+        <template v-for="(payment, idx) in nextRecurringPayments" :key="idx">
+          <div class="payment-card">
+            <div class="payment-title">{{ payment.title }}</div>
+            <div class="payment-amount">{{ payment.amount }} €</div>
+            <div class="payment-date">Nächste Fälligkeit: {{ payment.nextDate }}</div>
+          </div>
+          <div
+            v-if="idx < nextRecurringPayments.length - 1"
+            class="divider-with-date"
+          >
+            <span class="divider-date">{{ payment.nextDate }}</span>
+            <span class="divider-line"></span>
+          </div>
+        </template>
         <div v-if="nextRecurringPayments.length === 0" class="no-payments">
           Keine wiederholenden Zahlungen gefunden.
         </div>
       </div>
-      <button class="new-booking-btn" @click="openMask">Neue Buchung</button>
+      <button class="new-booking-btn" @click.stop="openMask">Neue Buchung</button>
     </div>
-    <div class="dashboard-box"></div>
-    <div class="dashboard-box"></div>
-    <div class="dashboard-box"></div>
+    <div class="dashboard-box" :class="{ selected: selectedBox === 1 }" @click="selectBox(1)">
+      <h3>Alle Transaktionen</h3>
+      <div class="payment-cards">
+        <div v-for="(transaction, idx) in allTransactions" :key="idx" class="payment-card">
+          <div class="payment-title">{{ transaction.title }}</div>
+          <div class="payment-amount">{{ transaction.amount }} €</div>
+          <div class="payment-date">Datum: {{ transaction.date }}</div>
+        </div>
+        <div v-if="allTransactions.length === 0" class="no-payments">
+          Keine Transaktionen gefunden.
+        </div>
+      </div>
+      <button class="new-booking-btn" @click.stop="openTransactionMask">Neue Zahlung</button>
+    </div>
+    <div class="dashboard-box" :class="{ selected: selectedBox === 2 }" @click="selectBox(2)"></div>
+    <div class="dashboard-box" :class="{ selected: selectedBox === 3 }" @click="selectBox(3)"></div>
   </div>
 </template>
 
@@ -28,6 +50,11 @@
 import eventBus from '../event/eventBus.js'
 import { ref } from 'vue'
 
+const selectedBox = ref(null)
+
+function selectBox(idx) {
+  selectedBox.value = idx
+}
 
 // Dummy data for demonstration
 const recurringPayments = ref([
@@ -37,13 +64,22 @@ const recurringPayments = ref([
   { title: 'Handyvertrag', amount: 25, nextDate: '2025-05-20' }
 ])
 
-const nextRecurringPayments = ref(
-  recurringPayments.value.slice(0, 3)
-)
+const nextRecurringPayments = ref(recurringPayments.value.slice(0, 3))
 
+// Dummy data for all transactions
+const allTransactions = ref([
+  { title: 'Miete', amount: 800, date: '2025-05-01' },
+  { title: 'Supermarkt', amount: 120, date: '2025-05-03' },
+  { title: 'Netflix', amount: 15, date: '2025-05-04' },
+  { title: 'Restaurant', amount: 45, date: '2025-05-05' }
+])
 
 function openMask() {
   eventBus.emit('open-mask')
+}
+
+function openTransactionMask() {
+  eventBus.emit('open-transaction-mask')
 }
 </script>
 
@@ -54,11 +90,11 @@ function openMask() {
   grid-template-rows: repeat(2, 1fr);
   height: 100%;
   width: 100%;
-  gap: 1rem; /* Increased gap for visible space between boxes */
+  gap: 1rem;
 }
 
 .dashboard-box {
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
   border: none;
   display: flex;
   flex-direction: column;
@@ -69,6 +105,15 @@ function openMask() {
   width: 100%;
   padding: 1rem 0.5rem;
   border-radius: 18px;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s;
+  cursor: pointer;
+}
+
+.dashboard-box.selected {
+  box-shadow: 0 0 0 3px #2d8cf0;
+  border: 2px solid #2d8cf0;
 }
 
 .dashboard-box h3 {
@@ -87,9 +132,7 @@ function openMask() {
 
 .payment-card {
   background: #232323;
-  /* Remove blue border and add a soft shadow */
   border: none;
-
   padding: 0.7rem 1rem;
   color: #fff;
   font-size: 1rem;
@@ -131,5 +174,26 @@ function openMask() {
 }
 .new-booking-btn:hover {
   background: #1867c0;
+}
+
+.divider-with-date {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0.3rem 0;
+}
+
+.divider-date {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-right: 0.7rem;
+  min-width: 110px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #333;
+  border-radius: 1px;
 }
 </style>

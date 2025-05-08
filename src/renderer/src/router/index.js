@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/settings',
     component: Settings
-  },
+  }
 ]
 
 const router = createRouter({

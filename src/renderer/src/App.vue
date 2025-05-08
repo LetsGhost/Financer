@@ -10,7 +10,7 @@
 
 <script setup>
 import Sidebar from './components/Sidebar.vue'
-import ManaTrack from './components/ManaTrack.vue';
+import ManaTrack from './components/ManaTrack.vue'
 </script>
 
 <style>

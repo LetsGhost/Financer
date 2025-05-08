@@ -22,6 +22,8 @@ function createWindow() {
     }
   })
 
+  mainWindow.maximize() // Start maximized
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })

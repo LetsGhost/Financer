@@ -9,7 +9,7 @@ body,
 }
 
 button {
-  background-color: #2A2A2A;
+  background-color: #2a2a2a;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -19,16 +19,16 @@ button {
 }
 
 button:hover {
-  background-color: #3A3A3A;
+  background-color: #3a3a3a;
 }
 button:active {
-  background-color: #4A4A4A;
+  background-color: #4a4a4a;
 }
 button:focus {
   outline: none;
 }
 button:disabled {
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   cursor: not-allowed;
 }
 button + button {
@@ -36,8 +36,8 @@ button + button {
 }
 
 input {
-  background-color: #2A2A2A;
-  color: #E0E0E0;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
   border: none;
   padding: 10px;
   border-radius: 0.4em;
@@ -50,8 +50,8 @@ input::placeholder {
   color: #707070;
 }
 
-input[type="radio"] {
-  accent-color: #FF4081; /* Modern browsers: custom color */
+input[type='radio'] {
+  accent-color: #ff4081; /* Modern browsers: custom color */
   width: 1.2em;
   height: 1.2em;
   margin-right: 0.5em;
@@ -59,21 +59,21 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-label input[type="radio"] {
+label input[type='radio'] {
   margin-right: 0.3em;
 }
 
-input[type="dropdown"] {
-  background-color: #2A2A2A;
-  color: #E0E0E0;
+input[type='dropdown'] {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
   border: none;
   padding: 10px;
   border-radius: 0.4em;
   width: 100%;
 }
-input[type="dropdown"]:focus {
+input[type='dropdown']:focus {
   outline: none;
 }
-input[type="dropdown"]::placeholder {
+input[type='dropdown']::placeholder {
   color: #707070;
 }
